@@ -1,8 +1,11 @@
+#include <stdio.h>
 #include <stdlib.h>
 #include <curses.h>
 #include <signal.h>
 #include <unistd.h>
 #include <time.h>
+#include <string.h>
+#include <linux/limits.h>
 
 #define GRAVITY 0.7
 #define INITIAL_VELOCITY 0
@@ -34,6 +37,9 @@ Tubes gTubes = NULL;
 
 //init score
 int score = 0;
+//highscore
+FILE * highscoreFile;
+long int highscore;
 
 //function declarations
 void updateBird(bird* b, int jumpBool);
@@ -207,8 +213,31 @@ void updateBird(bird* b, int jumpBool) {
 }
 
 static void finish(int sig) {  //kill program the right way
-    endwin();
-    printf("Game Over\nScore: %4d\n\n", score);
+    char hpath[PATH_MAX]; //highscore path
+    int previousHighscore=0;
+    char hRelativePath[23] = "/.flappybird_highscore\0"; //highscore relative path
+
+    endwin(); //kill graphics, go back to terminal prompt
+
+    strcat(hpath, getenv("HOME"));
+    strcat(hpath, hRelativePath);
+
+    highscoreFile = fopen(hpath, "r");
+    if (highscoreFile != NULL) {
+        fscanf(highscoreFile, "%d", &previousHighscore);
+        fclose(highscoreFile);
+    }
+
+    if(score>previousHighscore) {
+        highscoreFile = fopen(hpath, "w");
+        printf("New HIGHSCORE!!\n");
+        fprintf(highscoreFile, "%d\n", score);
+        fclose(highscoreFile);
+    }
+
+    printf("Game Over\nScore: %4d\n", score);
+    printf("Last highscore: %4d\n\n", previousHighscore);
+
     exit(0);
 }
 
