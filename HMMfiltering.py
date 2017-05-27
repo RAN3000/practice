@@ -1,7 +1,7 @@
 # everything refers to:
 #  http://www.cs.ubc.ca/~nando/340-2012/lectures/l6.pdf
 #
-# s = sad; h = happy; 
+# s = sad; h = happy;
 # w = watching TV shows; s = sleeping; c = crying; f = facebooking;
 
 import numpy as np
@@ -22,7 +22,7 @@ t = 0
 def filtering(prior, t):
     global transition
     global observation
-    
+
     #prediction
     pred = prediction(prior)
     #bayesian update
@@ -30,7 +30,7 @@ def filtering(prior, t):
 
     print "Calculated posterior at time step %d:" % t
     print(bayesian_update)
-    print "\n" 
+    print "\n"
 
     t += 1
     if (t <= 5):
@@ -54,7 +54,7 @@ def bayes(pr, l):
     post = np.zeros([2, 4])
 
     determinant = pr.dot(l)
-    
+
     for i in range(2):
         for j in range(4):
             post[i][j] = l[i][j] * pr[i] / determinant[j]
