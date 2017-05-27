@@ -17,3 +17,8 @@ practice the C programming language having fun!
     Small Google's PageRank algorithm implementation in C. I wrote the program 
 when first learning about matrices in C. It helped me practicing C and 
 understanding how the algorithm works.
+
+- *HuAlert*
+    App prototype in Python. Uses the OpenCV library for computer vision.
+That's the project that came out of the 2017 Wired Next Fest Hackathon in
+Milan, Italy.
