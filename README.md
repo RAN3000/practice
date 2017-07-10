@@ -22,3 +22,7 @@ understanding how the algorithm works.
     App prototype in Python. Uses the OpenCV library for computer vision.
 That's the project that came out of the 2017 Wired Next Fest Hackathon in
 Milan, Italy.
+
+- *SimpleLinearRegression*
+    Python notebook for simple linear regression, numpy and matplotlib are
+used.
